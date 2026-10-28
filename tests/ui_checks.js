@@ -18,7 +18,12 @@ try {
   refreshAll();
   L("opens on Guide", !$("viewGuide").hidden && $("viewVault").hidden && $("tabBtnGuide").classList.contains("active"));
   L("guide math rendered", document.querySelectorAll("#viewGuide .katex").length > 30 && !document.querySelector("#viewGuide .katex-error"), document.querySelectorAll("#viewGuide .katex").length);
-  L("no list on Guide", document.querySelector(".sidebar").getBoundingClientRect().width === 0 && document.querySelector(".guide-start").getBoundingClientRect().left < 300, document.querySelector(".guide-start").getBoundingClientRect().left);
+  // The list is hidden and the welcome card is centred on the whole page (with the list showing it
+  // would sit ~136 px right of centre). Measured against the page width, so scrollbar width
+  // (Windows: 15 px, Linux CI: 0) does not matter.
+  { const card = document.querySelector(".guide-start").getBoundingClientRect();
+    const offCentre = card.left - (document.documentElement.clientWidth - card.width) / 2;
+    L("no list on Guide", document.querySelector(".sidebar").getBoundingClientRect().width === 0 && Math.abs(offCentre) < 2, `card ${card.left}px from the left, ${offCentre}px off centre`); }
   switchTab("vault");
   L("list back on Equations", document.querySelector(".sidebar").getBoundingClientRect().width > 200);
   const tb = $("sideToggleBtn").getBoundingClientRect(), tt = document.querySelector(".sidebar .section-title").getBoundingClientRect();
