@@ -13,6 +13,7 @@
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
   <img alt="No installation" src="https://img.shields.io/badge/install-none-brightgreen.svg">
   <img alt="Runs in the browser" src="https://img.shields.io/badge/runs%20in-the%20browser-informational.svg">
+  <a href="https://doi.org/10.5281/zenodo.23736203"><img alt="DOI" src="https://zenodo.org/badge/1436765904.svg"></a>
 </p>
 
 ![The equation card: an ODE in index notation, what was found from it, and its values](docs/images/equation-card.png)

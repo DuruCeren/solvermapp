@@ -12,6 +12,7 @@ authors:
     affiliation: "Middle East Technical University"
     orcid: "https://orcid.org/0009-0007-5787-7654"
 version: 1.0.0
+doi: 10.5281/zenodo.23736203
 date-released: "2026-10-28"
 license: MIT
 repository-code: "https://github.com/DuruCeren/solvermapp"
