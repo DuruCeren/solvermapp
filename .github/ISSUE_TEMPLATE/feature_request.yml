@@ -1,0 +1,21 @@
+name: Feature request
+description: A notation, method, output or improvement you need.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: What do you need, and why?
+      description: Describe the model or task. An equation from your field and the paper it comes from help a lot.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: How could it work?
+      description: Optional. How you would write it, or what you would expect to get.
+  - type: textarea
+    id: refs
+    attributes:
+      label: References
+      description: Optional. Papers, textbooks or other tools that do this.

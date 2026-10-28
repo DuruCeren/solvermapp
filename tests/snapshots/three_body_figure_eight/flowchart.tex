@@ -1,0 +1,29 @@
+\begin{tikzpicture}[
+  node distance=6mm, >={Stealth[length=2.2mm]}, font=\small,
+  every node/.style={align=center},
+  term/.style={draw, rounded rectangle, minimum height=7mm, inner xsep=5mm, fill=blue!6},
+  io/.style={draw, trapezium, trapezium left angle=72, trapezium right angle=108, trapezium stretches body, minimum height=8mm, inner xsep=2mm, fill=green!6},
+  proc/.style={draw, rectangle, minimum height=8mm, minimum width=30mm, inner xsep=3mm},
+  dec/.style={draw, diamond, aspect=2.4, inner sep=1pt, fill=orange!8},
+  lbl/.style={font=\footnotesize, inner sep=2pt}]
+  \node[term] (n1) {Start};
+  \node[io, below=of n1] (n2) {Read inputs \\ $G$, $m_2$, $m_3$, $m_1$};
+  \node[proc, below=of n2] (n3) {Set start values \\ $\mathbf{v}_1$, $\mathbf{r}_1$, $\mathbf{v}_2$ \\ $\mathbf{r}_2$, $\mathbf{v}_3$, $\mathbf{r}_3$};
+  \node[proc, below=of n3] (n4) {$t = 0$, $\Delta t = (6.32591398 - 0) / 2000$};
+  \node[proc, below=of n4] (n5) {RK4 step: $\mathbf{r}_1$, $\mathbf{r}_2$, $\mathbf{r}_3$, $\mathbf{v}_1$, $\mathbf{v}_2$, $\mathbf{v}_3$, $t = t + \Delta t$ \\ {\footnotesize Eq.~(1) \textperiodcentered{} Position of body 1} \\ {\footnotesize Eq.~(2) \textperiodcentered{} Position of body 2} \\ {\footnotesize Eq.~(3) \textperiodcentered{} Position of body 3} \\ {\footnotesize Eq.~(4) \textperiodcentered{} Velocity of body 1} \\ {\footnotesize Eq.~(5) \textperiodcentered{} Velocity of body 2} \\ {\footnotesize Eq.~(6) \textperiodcentered{} Velocity of body 3}};
+  \node[dec, below=of n5] (n6) {$t < 6.32591398$ ?};
+  \node[proc, below=of n6] (n7) {Compute $E$ \\ {\footnotesize Eq.~(7) \textperiodcentered{} Total energy}};
+  \node[io, below=of n7] (n8) {Write results \\ $E$};
+  \node[term, below=of n8] (n9) {End};
+  \coordinate (E) at (current bounding box.east);
+  \coordinate (L0) at ([xshift=6mm]E);
+  \draw[->] (n1) -- (n2);
+  \draw[->] (n2) -- (n3);
+  \draw[->] (n3) -- (n4);
+  \draw[->] (n4) -- (n5);
+  \draw[->] (n5) -- (n6);
+  \draw[->] (n6) -- node[lbl, right] {no} (n7);
+  \draw[->] (n7) -- (n8);
+  \draw[->] (n8) -- (n9);
+  \draw[->] (n6.east) -- node[lbl, above] {yes} (n6.east -| L0) |- (n5.east);
+\end{tikzpicture}

@@ -1,0 +1,33 @@
+flowchart TD
+  n1(["Start"])
+  n2[/"Read inputs<br>N, f_i, x_1, x_2<br>p, a, b, R_u<br>T_g"/]
+  n3["Set start values<br>y = 1.0, T = 300.0"]
+  n4["n = 0"]
+  n5["Update y, n = n + 1<br>Eq. (1) · State step recurrence"]
+  n6{"n < 10 ?"}
+  n7["Compute F_total by summation<br>Eq. (2) · Total force summation"]
+  n8["Initial guess for v<br>branch b≤v"]
+  n9["Newton step: v←v − R(v)/R'(v)<br>Eq. (3) · Van der Waals equation of state"]
+  n10{"Step < 10^−10 ?<br>or 50 iterations"}
+  n11["Compute W by integration<br>Eq. (4) · Boundary work integral"]
+  n12["Update T<br>Eq. (5) · Non-linear relaxation update"]
+  n13{"Change in T < 10^−6 ?<br>or 500 iterations"}
+  n14[/"Write results<br>v"/]
+  n15(["End"])
+  n1 --> n2
+  n2 --> n3
+  n3 --> n4
+  n4 --> n5
+  n5 --> n6
+  n6 -->|no| n7
+  n7 --> n8
+  n8 --> n9
+  n9 --> n10
+  n10 -->|yes| n11
+  n11 --> n12
+  n12 --> n13
+  n13 -->|yes| n14
+  n14 --> n15
+  n6 -->|yes| n5
+  n10 -->|no| n9
+  n13 -->|no| n12

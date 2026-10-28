@@ -1,0 +1,6 @@
+# Text files are stored with LF line endings in the repository and checked out with the
+# platform's line endings. Snapshots stay LF everywhere, so the snapshot test compares the same text.
+* text=auto
+tests/snapshots/** text eol=lf
+*.png binary
+*.jpg binary

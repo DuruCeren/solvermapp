@@ -1,0 +1,19 @@
+flowchart TD
+  n1(["Start"])
+  n2[/"Read inputs<br>K, M"/]
+  n3["Set start values<br>c"]
+  n4["t = 0, Δt = (2 − 0)/200"]
+  n5["RK4 step: c, t = t + Δt<br>Eq. (1) · Species balance"]
+  n6{"t < 2 ?"}
+  n7["Compute c_tot<br>Eq. (2) · Total"]
+  n8[/"Write results<br>c_tot"/]
+  n9(["End"])
+  n1 --> n2
+  n2 --> n3
+  n3 --> n4
+  n4 --> n5
+  n5 --> n6
+  n6 -->|no| n7
+  n7 --> n8
+  n8 --> n9
+  n6 -->|yes| n5

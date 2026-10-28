@@ -1,0 +1,40 @@
+\begin{tikzpicture}[
+  node distance=6mm, >={Stealth[length=2.2mm]}, font=\small,
+  every node/.style={align=center},
+  term/.style={draw, rounded rectangle, minimum height=7mm, inner xsep=5mm, fill=blue!6},
+  io/.style={draw, trapezium, trapezium left angle=72, trapezium right angle=108, trapezium stretches body, minimum height=8mm, inner xsep=2mm, fill=green!6},
+  proc/.style={draw, rectangle, minimum height=8mm, minimum width=30mm, inner xsep=3mm},
+  dec/.style={draw, diamond, aspect=2.4, inner sep=1pt, fill=orange!8},
+  lbl/.style={font=\footnotesize, inner sep=2pt}]
+  \node[term] (n1) {Start};
+  \node[io, below=of n1] (n2) {Read inputs \\ $h$, $A$, $T_\infty$, $m$ \\ $c_p$, $F_0$, $\omega$};
+  \node[proc, below=of n2] (n3) {Set start values \\ $T$ = 373, $v$ = 0, $x$ = 1};
+  \node[proc, below=of n3] (n4) {$t = 0$, $\Delta t = (600 - 0) / 60$};
+  \node[proc, below=of n4] (n5) {Compute $\dot{Q}$ \\ {\footnotesize Eq.~(1) \textperiodcentered{} Heat flux}};
+  \node[proc, below=of n5] (n6) {RK4 step: $T$, $t = t + \Delta t$ \\ {\footnotesize Eq.~(2) \textperiodcentered{} Cooling} \\ {\footnotesize the boxes above run at every stage}};
+  \node[dec, below=of n6] (n7) {$t < 600$ ?};
+  \node[proc, below=of n7] (n8) {$t = 0$, $\Delta t = (3 - 0) / 300$};
+  \node[proc, below=of n8] (n9) {Compute $F$ \\ {\footnotesize Eq.~(3) \textperiodcentered{} Forcing}};
+  \node[proc, below=of n9] (n10) {RK4 step: $x$, $v$, $t = t + \Delta t$ \\ {\footnotesize Eq.~(4) \textperiodcentered{} Position} \\ {\footnotesize Eq.~(5) \textperiodcentered{} Velocity} \\ {\footnotesize the boxes above run at every stage}};
+  \node[dec, below=of n10] (n11) {$t < 3$ ?};
+  \node[proc, below=of n11] (n12) {Compute $E_k$ \\ {\footnotesize Eq.~(6) \textperiodcentered{} Energy}};
+  \node[io, below=of n12] (n13) {Write results \\ $E_k$};
+  \node[term, below=of n13] (n14) {End};
+  \coordinate (E) at (current bounding box.east);
+  \coordinate (L0) at ([xshift=6mm]E);
+  \draw[->] (n1) -- (n2);
+  \draw[->] (n2) -- (n3);
+  \draw[->] (n3) -- (n4);
+  \draw[->] (n4) -- (n5);
+  \draw[->] (n5) -- (n6);
+  \draw[->] (n6) -- (n7);
+  \draw[->] (n7) -- node[lbl, right] {no} (n8);
+  \draw[->] (n8) -- (n9);
+  \draw[->] (n9) -- (n10);
+  \draw[->] (n10) -- (n11);
+  \draw[->] (n11) -- node[lbl, right] {no} (n12);
+  \draw[->] (n12) -- (n13);
+  \draw[->] (n13) -- (n14);
+  \draw[->] (n7.east) -- node[lbl, above] {yes} (n7.east -| L0) |- (n5.east);
+  \draw[->] (n11.east) -- node[lbl, above] {yes} (n11.east -| L0) |- (n9.east);
+\end{tikzpicture}

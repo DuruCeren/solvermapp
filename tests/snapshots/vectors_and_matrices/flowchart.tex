@@ -1,0 +1,50 @@
+\begin{tikzpicture}[
+  node distance=6mm, >={Stealth[length=2.2mm]}, font=\small,
+  every node/.style={align=center},
+  term/.style={draw, rounded rectangle, minimum height=7mm, inner xsep=5mm, fill=blue!6},
+  io/.style={draw, trapezium, trapezium left angle=72, trapezium right angle=108, trapezium stretches body, minimum height=8mm, inner xsep=2mm, fill=green!6},
+  proc/.style={draw, rectangle, minimum height=8mm, minimum width=30mm, inner xsep=3mm},
+  dec/.style={draw, diamond, aspect=2.4, inner sep=1pt, fill=orange!8},
+  lbl/.style={font=\footnotesize, inner sep=2pt}]
+  \node[term] (n1) {Start};
+  \node[io, below=of n1] (n2) {Read inputs \\ $\mathbf{K}$, $\mathbf{F}$, $\mathbf{a}$, $\mathbf{b}$ \\ $\mathbf{M}$, $\mathbf{c}$};
+  \node[proc, below=of n2] (n3) {Set start values \\ $\mathbf{y}$};
+  \node[proc, below=of n3] (n4) {Compute $\mathbf{u}$ (linear solve) \\ {\footnotesize Eq.~(1) \textperiodcentered{} Stiffness system}};
+  \node[proc, below=of n4] (n5) {Compute $\mathbf{r}$ \\ {\footnotesize Eq.~(2) \textperiodcentered{} Inverse solve}};
+  \node[proc, below=of n5] (n6) {Compute $\mathbf{w}$ \\ {\footnotesize Eq.~(3) \textperiodcentered{} Cross product}};
+  \node[proc, below=of n6] (n7) {Compute $s$ \\ {\footnotesize Eq.~(4) \textperiodcentered{} Dot product}};
+  \node[proc, below=of n7] (n8) {Compute $n_a$ \\ {\footnotesize Eq.~(5) \textperiodcentered{} Norm}};
+  \node[proc, below=of n8] (n9) {$t = 0$, $\Delta t = (1 - 0) / 50$};
+  \node[proc, below=of n9] (n10) {RK4 step: $\mathbf{y}$, $t = t + \Delta t$ \\ {\footnotesize Eq.~(6) \textperiodcentered{} Rotation ODE}};
+  \node[dec, below=of n10] (n11) {$t < 1$ ?};
+  \node[proc, below=of n11] (n12) {Initial guess for $\mathbf{z}$};
+  \node[proc, below=of n12] (n13) {Newton step: $\mathbf{z} \leftarrow \mathbf{z} - R(\mathbf{z}) / R'(\mathbf{z})$ \\ {\footnotesize Eq.~(7) \textperiodcentered{} Nonlinear vector root}};
+  \node[dec, below=of n13] (n14) {Step < $10^{-12}$ ? \\ {\footnotesize or 50 iterations}};
+  \node[proc, below=of n14] (n15) {Compute $\mathbf{P}$ \\ {\footnotesize Eq.~(8) \textperiodcentered{} Gram matrix}};
+  \node[proc, below=of n15] (n16) {Compute $E$ \\ {\footnotesize Eq.~(9) \textperiodcentered{} Strain energy}};
+  \node[proc, below=of n16] (n17) {Compute $\mathbf{q}$ \\ {\footnotesize Eq.~(10) \textperiodcentered{} Combination}};
+  \node[io, below=of n17] (n18) {Write results \\ $E$, $\mathbf{w}$, $s$, $n_a$ \\ $\mathbf{z}$, $\mathbf{P}$, $\mathbf{q}$};
+  \node[term, below=of n18] (n19) {End};
+  \coordinate (E) at (current bounding box.east);
+  \coordinate (L0) at ([xshift=6mm]E);
+  \draw[->] (n1) -- (n2);
+  \draw[->] (n2) -- (n3);
+  \draw[->] (n3) -- (n4);
+  \draw[->] (n4) -- (n5);
+  \draw[->] (n5) -- (n6);
+  \draw[->] (n6) -- (n7);
+  \draw[->] (n7) -- (n8);
+  \draw[->] (n8) -- (n9);
+  \draw[->] (n9) -- (n10);
+  \draw[->] (n10) -- (n11);
+  \draw[->] (n11) -- node[lbl, right] {no} (n12);
+  \draw[->] (n12) -- (n13);
+  \draw[->] (n13) -- (n14);
+  \draw[->] (n14) -- node[lbl, right] {yes} (n15);
+  \draw[->] (n15) -- (n16);
+  \draw[->] (n16) -- (n17);
+  \draw[->] (n17) -- (n18);
+  \draw[->] (n18) -- (n19);
+  \draw[->] (n11.east) -- node[lbl, above] {yes} (n11.east -| L0) |- (n10.east);
+  \draw[->] (n14.east) -- node[lbl, above] {no} (n14.east -| L0) |- (n13.east);
+\end{tikzpicture}

@@ -1,0 +1,348 @@
+{
+  "equations": [
+    {
+      "id": "eq_mvnrkqgagfj2",
+      "name": "Stiffness system",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "implicit",
+      "latex": "\\mathbf{K}\\mathbf{u} = \\mathbf{F}",
+      "outputs": [
+        "\\mathbf{u}"
+      ],
+      "inputs": [
+        "\\mathbf{K}",
+        "\\mathbf{F}"
+      ],
+      "loopMeta": "method = newton, tol = 1e-10, max_iter = 50",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvnrkqga8wvy",
+      "name": "Strain energy",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "explicit",
+      "latex": "E = \\frac{1}{2}\\mathbf{u}^T\\mathbf{K}\\mathbf{u}",
+      "outputs": [
+        "E"
+      ],
+      "inputs": [
+        "\\mathbf{u}",
+        "\\mathbf{K}"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvnrkqgap9hn",
+      "name": "Inverse solve",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "explicit",
+      "latex": "\\mathbf{r} = \\mathbf{K}^{-1}\\mathbf{F}",
+      "outputs": [
+        "\\mathbf{r}"
+      ],
+      "inputs": [
+        "\\mathbf{K}",
+        "\\mathbf{F}"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvnrkqgabbyg",
+      "name": "Cross product",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "explicit",
+      "latex": "\\mathbf{w} = \\mathbf{a} \\times \\mathbf{b}",
+      "outputs": [
+        "\\mathbf{w}"
+      ],
+      "inputs": [
+        "\\mathbf{a}",
+        "\\mathbf{b}"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvnrkqgahk3u",
+      "name": "Dot product",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "explicit",
+      "latex": "s = \\mathbf{a} \\cdot \\mathbf{b}",
+      "outputs": [
+        "s"
+      ],
+      "inputs": [
+        "\\mathbf{a}",
+        "\\mathbf{b}"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvnrkqgafewy",
+      "name": "Norm",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "explicit",
+      "latex": "n_a = \\|\\mathbf{a}\\|",
+      "outputs": [
+        "n_a"
+      ],
+      "inputs": [
+        "\\mathbf{a}"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvnrkqga8g3v",
+      "name": "Rotation ODE",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "ode",
+      "latex": "\\frac{d\\mathbf{y}}{dt} = \\mathbf{M}\\mathbf{y}",
+      "outputs": [
+        "\\mathbf{y}"
+      ],
+      "inputs": [
+        "\\mathbf{M}",
+        "\\mathbf{y}",
+        "t"
+      ],
+      "loopMeta": "t = 0..1, steps = 50, method = rk4",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvnrkqgarzjb",
+      "name": "Nonlinear vector root",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "implicit",
+      "latex": "\\mathbf{z} \\odot \\mathbf{z} = \\mathbf{c}",
+      "outputs": [
+        "\\mathbf{z}"
+      ],
+      "inputs": [
+        "\\mathbf{c}"
+      ],
+      "loopMeta": "tol = 1e-12, max_iter = 50",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": false,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvnrkqgau2n1",
+      "name": "Gram matrix",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "explicit",
+      "latex": "\\mathbf{P} = \\mathbf{K}\\mathbf{K}^T",
+      "outputs": [
+        "\\mathbf{P}"
+      ],
+      "inputs": [
+        "\\mathbf{K}"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvnrkqgab5g1",
+      "name": "Combination",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "explicit",
+      "latex": "\\mathbf{q} = 2 \\mathbf{r} + \\mathbf{u}",
+      "outputs": [
+        "\\mathbf{q}"
+      ],
+      "inputs": [
+        "\\mathbf{r}",
+        "\\mathbf{u}"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    }
+  ],
+  "variableMeta": {
+    "\\mathbf{K}": {
+      "initVal": "4, -1; -1, 3",
+      "units": "N/m",
+      "desc": "Stiffness",
+      "size": "2x2"
+    },
+    "\\mathbf{F}": {
+      "initVal": "1, 2",
+      "units": "N",
+      "desc": "Load",
+      "size": "2"
+    },
+    "\\mathbf{u}": {
+      "initVal": "0",
+      "units": "m",
+      "desc": "Displacement",
+      "size": "2"
+    },
+    "E": {
+      "initVal": "0",
+      "units": "J",
+      "desc": "Energy"
+    },
+    "\\mathbf{r}": {
+      "initVal": "0",
+      "units": "m",
+      "desc": "Same, by inverse",
+      "size": "2"
+    },
+    "\\mathbf{a}": {
+      "initVal": "1, 2, 3",
+      "units": "m",
+      "desc": "a",
+      "size": "3"
+    },
+    "\\mathbf{b}": {
+      "initVal": "4, 5, 6",
+      "units": "m",
+      "desc": "b",
+      "size": "3"
+    },
+    "\\mathbf{w}": {
+      "initVal": "0",
+      "units": "m^2",
+      "desc": "a x b",
+      "size": "3"
+    },
+    "s": {
+      "initVal": "0",
+      "units": "m^2",
+      "desc": "a . b"
+    },
+    "n_a": {
+      "initVal": "0",
+      "units": "m",
+      "desc": "|a|"
+    },
+    "\\mathbf{y}": {
+      "initVal": "1, 0",
+      "units": "1",
+      "desc": "State",
+      "size": "2"
+    },
+    "\\mathbf{M}": {
+      "initVal": "0, 1; -1, 0",
+      "units": "1/s",
+      "desc": "Rotation",
+      "size": "2x2"
+    },
+    "t": {
+      "initVal": "0",
+      "units": "s",
+      "desc": "Time"
+    },
+    "\\mathbf{z}": {
+      "initVal": "1",
+      "units": "1",
+      "desc": "Unknown",
+      "size": "2"
+    },
+    "\\mathbf{c}": {
+      "initVal": "4, 9",
+      "units": "1",
+      "desc": "Squares",
+      "size": "2"
+    },
+    "\\mathbf{P}": {
+      "initVal": "0",
+      "units": "N^2/m^2",
+      "desc": "K K^T",
+      "size": "2x2"
+    },
+    "\\mathbf{q}": {
+      "initVal": "0",
+      "units": "m",
+      "desc": "2r + u",
+      "size": "2"
+    }
+  },
+  "report": {
+    "title": "Vectors and matrices: linear system, products, vector ODE, vector root",
+    "author": "",
+    "nomenclature": true,
+    "equations": true,
+    "algorithm": true,
+    "flowchart": true,
+    "references": true,
+    "values": true,
+    "grouping": "role",
+    "mode": "standalone"
+  },
+  "flowchart": {
+    "numbers": true,
+    "titles": true
+  }
+}

@@ -1,0 +1,28 @@
+\begin{tikzpicture}[
+  node distance=6mm, >={Stealth[length=2.2mm]}, font=\small,
+  every node/.style={align=center},
+  term/.style={draw, rounded rectangle, minimum height=7mm, inner xsep=5mm, fill=blue!6},
+  io/.style={draw, trapezium, trapezium left angle=72, trapezium right angle=108, trapezium stretches body, minimum height=8mm, inner xsep=2mm, fill=green!6},
+  proc/.style={draw, rectangle, minimum height=8mm, minimum width=30mm, inner xsep=3mm},
+  dec/.style={draw, diamond, aspect=2.4, inner sep=1pt, fill=orange!8},
+  lbl/.style={font=\footnotesize, inner sep=2pt}]
+  \node[term] (n1) {Start};
+  \node[io, below=of n1] (n2) {Read inputs \\ $Q$, $n$};
+  \node[proc, below=of n2] (n3) {Compute $H$ for every $i$, $j$ \\ {\footnotesize Eq.~(1) \textperiodcentered{} Hilbert matrix}};
+  \node[proc, below=of n3] (n4) {Compute $b$ for every $i$ \\ {\footnotesize Eq.~(2) \textperiodcentered{} Row sums}};
+  \node[proc, below=of n4] (n5) {Compute $C$ for every $i$, $j$ \\ {\footnotesize Eq.~(3) \textperiodcentered{} Product}};
+  \node[proc, below=of n5] (n6) {Compute $\tau$ \\ {\footnotesize Eq.~(4) \textperiodcentered{} Trace}};
+  \node[proc, below=of n6] (n7) {Compute $d$ for every $i$ \\ {\footnotesize Eq.~(5) \textperiodcentered{} Shifted}};
+  \node[proc, below=of n7] (n8) {Compute $\mathbf{x}$ \\ {\footnotesize Eq.~(6) \textperiodcentered{} Solve}};
+  \node[io, below=of n8] (n9) {Write results \\ $\mathbf{x}$, $C$, $\tau$, $d$};
+  \node[term, below=of n9] (n10) {End};
+  \draw[->] (n1) -- (n2);
+  \draw[->] (n2) -- (n3);
+  \draw[->] (n3) -- (n4);
+  \draw[->] (n4) -- (n5);
+  \draw[->] (n5) -- (n6);
+  \draw[->] (n6) -- (n7);
+  \draw[->] (n7) -- (n8);
+  \draw[->] (n8) -- (n9);
+  \draw[->] (n9) -- (n10);
+\end{tikzpicture}

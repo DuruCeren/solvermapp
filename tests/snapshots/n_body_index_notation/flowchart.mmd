@@ -1,0 +1,19 @@
+flowchart TD
+  n1(["Start"])
+  n2[/"Read inputs<br>G, m, N"/]
+  n3["Set start values<br>v, r"]
+  n4["t = 0, Δt = (6.32591398 − 0)/2000"]
+  n5["RK4 step: r, v, t = t + Δt<br>Eq. (1) · Positions<br>Eq. (2) · Velocities"]
+  n6{"t < 6.32591398 ?"}
+  n7["Compute E<br>Eq. (3) · Total energy"]
+  n8[/"Write results<br>E"/]
+  n9(["End"])
+  n1 --> n2
+  n2 --> n3
+  n3 --> n4
+  n4 --> n5
+  n5 --> n6
+  n6 -->|no| n7
+  n7 --> n8
+  n8 --> n9
+  n6 -->|yes| n5

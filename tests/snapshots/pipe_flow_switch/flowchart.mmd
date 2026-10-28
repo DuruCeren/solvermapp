@@ -1,0 +1,26 @@
+flowchart TD
+  n1(["Start"])
+  n2[/"Read inputs<br>μ_0, B, T_0, ρ<br>u, D, T, k_s<br>L"/]
+  n3["Define μ(T)<br>Eq. (1) · Viscosity"]
+  n4["Compute R_e<br>Eq. (2) · Reynolds number"]
+  n5{"R_e < 2300 ?"}
+  n6["Compute f<br>Eq. (3) · Laminar friction"]
+  n7["Initial guess for f<br>branch 10^−4≤f"]
+  n8["Newton step: f←f − R(f)/R'(f)<br>Eq. (4) · Colebrook"]
+  n9{"Step < 10^−12 ?<br>or 50 iterations"}
+  n10["Compute Δp<br>Eq. (5) · Pressure drop"]
+  n11[/"Write results<br>Δp"/]
+  n12(["End"])
+  n1 --> n2
+  n2 --> n3
+  n3 --> n4
+  n4 --> n5
+  n5 -->|yes| n6
+  n7 --> n8
+  n8 --> n9
+  n9 -->|yes| n10
+  n10 --> n11
+  n11 --> n12
+  n9 -->|no| n8
+  n5 -->|no| n7
+  n6 --> n10

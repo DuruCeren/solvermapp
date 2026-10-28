@@ -1,0 +1,209 @@
+{
+  "equations": [
+    {
+      "id": "eq_mvnrkqa17yyq",
+      "name": "Viscosity",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "function",
+      "latex": "\\mu(T) = \\mu_0 \\exp\\left(\\frac{B}{T} - \\frac{B}{T_0}\\right)",
+      "outputs": [
+        "\\mu"
+      ],
+      "inputs": [
+        "\\mu_0",
+        "B",
+        "T_0"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvnrkqa102kz",
+      "name": "Reynolds number",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "explicit",
+      "latex": "R_e = \\frac{\\rho u D}{\\mu(T)}",
+      "outputs": [
+        "R_e"
+      ],
+      "inputs": [
+        "\\rho",
+        "u",
+        "D",
+        "\\mu",
+        "T"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvnrkqa167bv",
+      "name": "Laminar friction",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "explicit",
+      "latex": "f = \\frac{64}{R_e}",
+      "outputs": [
+        "f"
+      ],
+      "inputs": [
+        "R_e"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": "R_e < 2300"
+    },
+    {
+      "id": "eq_mvnrkqa1bign",
+      "name": "Colebrook",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "implicit",
+      "latex": "\\frac{1}{\\sqrt{f}} = -2 \\log_{10}\\left(\\frac{k_s}{3.7 D} + \\frac{2.51}{R_e \\sqrt{f}}\\right)",
+      "outputs": [
+        "f"
+      ],
+      "inputs": [
+        "k_s",
+        "D",
+        "R_e"
+      ],
+      "loopMeta": "method = newton, tol = 1e-12, max_iter = 50, min = 1e-4",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": "\\text{otherwise}"
+    },
+    {
+      "id": "eq_mvnrkqa16fg3",
+      "name": "Pressure drop",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "explicit",
+      "latex": "\\Delta p = f \\frac{L}{D} \\frac{\\rho u^2}{2}",
+      "outputs": [
+        "\\Delta p"
+      ],
+      "inputs": [
+        "f",
+        "L",
+        "D",
+        "\\rho",
+        "u"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    }
+  ],
+  "variableMeta": {
+    "\\mu_0": {
+      "initVal": "1e-3",
+      "units": "Pa s",
+      "desc": "Viscosity at T_0"
+    },
+    "B": {
+      "initVal": "1800",
+      "units": "K",
+      "desc": "Viscosity constant"
+    },
+    "T_0": {
+      "initVal": "293",
+      "units": "K",
+      "desc": "Reference temperature"
+    },
+    "T": {
+      "initVal": "313",
+      "units": "K",
+      "desc": "Temperature"
+    },
+    "\\rho": {
+      "initVal": "998",
+      "units": "kg/m^3",
+      "desc": "Density"
+    },
+    "u": {
+      "initVal": "2",
+      "units": "m/s",
+      "desc": "Velocity"
+    },
+    "D": {
+      "initVal": "0.05",
+      "units": "m",
+      "desc": "Diameter"
+    },
+    "k_s": {
+      "initVal": "4.5e-5",
+      "units": "m",
+      "desc": "Roughness"
+    },
+    "L": {
+      "initVal": "10",
+      "units": "m",
+      "desc": "Length"
+    },
+    "f": {
+      "initVal": "0.02",
+      "units": "1",
+      "desc": "Friction factor"
+    },
+    "R_e": {
+      "initVal": "1",
+      "units": "1",
+      "desc": "Reynolds"
+    },
+    "\\Delta p": {
+      "initVal": "0",
+      "units": "Pa",
+      "desc": "Pressure drop"
+    },
+    "\\mu": {
+      "initVal": "1e-3",
+      "units": "Pa s",
+      "desc": "Viscosity"
+    }
+  },
+  "report": {
+    "title": "Pipe flow: viscosity function, laminar / turbulent switch",
+    "author": "",
+    "nomenclature": true,
+    "equations": true,
+    "algorithm": true,
+    "flowchart": true,
+    "references": true,
+    "values": true,
+    "grouping": "role",
+    "mode": "standalone"
+  },
+  "flowchart": {
+    "numbers": true,
+    "titles": true
+  }
+}

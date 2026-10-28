@@ -1,0 +1,40 @@
+flowchart TD
+  n1(["Start"])
+  n2[/"Read inputs<br>K, F, a, b<br>M, c"/]
+  n3["Set start values<br>y"]
+  n4["Compute u (linear solve)<br>Eq. (1) · Stiffness system"]
+  n5["Compute r<br>Eq. (2) · Inverse solve"]
+  n6["Compute w<br>Eq. (3) · Cross product"]
+  n7["Compute s<br>Eq. (4) · Dot product"]
+  n8["Compute n_a<br>Eq. (5) · Norm"]
+  n9["t = 0, Δt = (1 − 0)/50"]
+  n10["RK4 step: y, t = t + Δt<br>Eq. (6) · Rotation ODE"]
+  n11{"t < 1 ?"}
+  n12["Initial guess for z"]
+  n13["Newton step: z←z − R(z)/R'(z)<br>Eq. (7) · Nonlinear vector root"]
+  n14{"Step < 10^−12 ?<br>or 50 iterations"}
+  n15["Compute P<br>Eq. (8) · Gram matrix"]
+  n16["Compute E<br>Eq. (9) · Strain energy"]
+  n17["Compute q<br>Eq. (10) · Combination"]
+  n18[/"Write results<br>E, w, s, n_a<br>z, P, q"/]
+  n19(["End"])
+  n1 --> n2
+  n2 --> n3
+  n3 --> n4
+  n4 --> n5
+  n5 --> n6
+  n6 --> n7
+  n7 --> n8
+  n8 --> n9
+  n9 --> n10
+  n10 --> n11
+  n11 -->|no| n12
+  n12 --> n13
+  n13 --> n14
+  n14 -->|yes| n15
+  n15 --> n16
+  n16 --> n17
+  n17 --> n18
+  n18 --> n19
+  n11 -->|yes| n10
+  n14 -->|no| n13

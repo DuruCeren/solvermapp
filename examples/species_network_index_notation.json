@@ -1,0 +1,94 @@
+{
+  "equations": [
+    {
+      "id": "eq_mvpc8zqds2hn",
+      "name": "Species balance",
+      "author": "",
+      "year": "",
+      "eqNumber": "1",
+      "source": "First-order reaction network",
+      "archetype": "ode",
+      "latex": "\\frac{dc_i}{dt} = \\sum_j K_{ij} c_j",
+      "outputs": [
+        "c"
+      ],
+      "inputs": [
+        "K",
+        "c",
+        "t"
+      ],
+      "loopMeta": "t = 0..2, steps = 200, method = rk4",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvpc8zqdwriv",
+      "name": "Total",
+      "author": "",
+      "year": "",
+      "eqNumber": "2",
+      "source": "First-order reaction network",
+      "archetype": "explicit",
+      "latex": "c_{tot} = \\sum_i c_i",
+      "outputs": [
+        "c_{tot}"
+      ],
+      "inputs": [
+        "c"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    }
+  ],
+  "variableMeta": {
+    "M": {
+      "initVal": "3",
+      "units": "1",
+      "desc": "Number of species"
+    },
+    "c": {
+      "initVal": "1, 0, 0",
+      "units": "mol/m^3",
+      "desc": "Concentrations"
+    },
+    "K": {
+      "initVal": "-2, 0, 0; 1.5, -1, 0.5; 0.5, 1, -0.5",
+      "units": "1/s",
+      "desc": "Rate matrix (columns sum to 0)"
+    },
+    "c_{tot}": {
+      "initVal": "0",
+      "units": "mol/m^3",
+      "desc": "Total concentration"
+    },
+    "t": {
+      "initVal": "0",
+      "units": "s",
+      "desc": "Time"
+    }
+  },
+  "report": {
+    "title": "Linear species network in index notation",
+    "author": "",
+    "nomenclature": true,
+    "equations": true,
+    "algorithm": true,
+    "flowchart": true,
+    "references": true,
+    "values": true,
+    "grouping": "role",
+    "mode": "standalone"
+  },
+  "flowchart": {
+    "numbers": true,
+    "titles": true
+  },
+  "indices": "i, j = 1..M"
+}

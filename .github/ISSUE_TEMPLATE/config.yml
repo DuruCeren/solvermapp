@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: User guide
+    url: https://github.com/DuruCeren/solvermapp/blob/main/docs/USER_GUIDE.md
+    about: How to write equations, settings, switches, vectors and index notation.
+  - name: Security problem
+    url: https://github.com/DuruCeren/solvermapp/blob/main/SECURITY.md
+    about: Please report security problems privately, as described here.

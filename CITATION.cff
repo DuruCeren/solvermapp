@@ -1,0 +1,28 @@
+# Read by GitHub's "Cite this repository" button and by Zenodo.
+cff-version: 1.2.0
+message: "If you use SolverMapp in your research, please cite it as below."
+type: software
+title: "SolverMapp: from the equations of a paper to a working solver"
+abstract: >-
+  SolverMapp is a browser-based tool that turns the equations of a numerical model, typed in plain math or LaTeX, into a solution procedure. It detects the type of each equation (explicit, marching and convergence loops, sums, integrals, implicit equations solved by Newton-Raphson, first- and second-order ODEs, functions), builds the dependency graph and the order of solution
+  with coupled blocks, checks dimensional consistency, and exports a solver in Python, MATLAB and Fortran, a flowchart (SVG, PNG, TikZ, Mermaid) and a LaTeX model description. It supports switches between equations, vectors and matrices, and index notation.
+authors:
+  - family-names: "Cerit"
+    given-names: "Duru Ceren"
+    affiliation: "Middle East Technical University"
+    orcid: "https://orcid.org/0009-0007-5787-7654"
+version: 1.0.0
+date-released: "2026-10-28"
+license: MIT
+repository-code: "https://github.com/DuruCeren/solvermapp"
+url: "https://DuruCeren.github.io/solvermapp/"
+keywords:
+  - numerical methods
+  - equation-based modelling
+  - solver generation
+  - code generation
+  - dependency graph
+  - Newton-Raphson
+  - Runge-Kutta
+  - LaTeX
+  - scientific software

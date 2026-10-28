@@ -1,0 +1,186 @@
+{
+  "equations": [
+    {
+      "id": "eq_1",
+      "ioAuto": true,
+      "typeAuto": true,
+      "name": "State step recurrence",
+      "author": "",
+      "year": "",
+      "eqNumber": "1",
+      "source": "Discrete marching test",
+      "archetype": "marching",
+      "latex": "y_{n+1} = y_n + 1",
+      "outputs": [
+        "y"
+      ],
+      "inputs": [
+        "y"
+      ],
+      "loopMeta": "N_steps = 10",
+      "assumptions": "Starts from initial condition y_0 = 1 and marches N_steps times"
+    },
+    {
+      "id": "eq_2",
+      "ioAuto": true,
+      "typeAuto": true,
+      "name": "Total force summation",
+      "author": "",
+      "year": "",
+      "eqNumber": "2",
+      "source": "Discrete force balance",
+      "archetype": "summation",
+      "latex": "F_{total} = \\sum_{i=1}^{N} f_i",
+      "outputs": [
+        "F_{total}"
+      ],
+      "inputs": [
+        "N",
+        "f_i"
+      ],
+      "loopMeta": "i = 1..N",
+      "assumptions": "Index i is automatically recognized as a local loop counter"
+    },
+    {
+      "id": "eq_3",
+      "ioAuto": true,
+      "typeAuto": true,
+      "name": "Boundary work integral",
+      "author": "Clapeyron",
+      "year": "1834",
+      "eqNumber": "3",
+      "source": "Thermodynamics 1st law",
+      "archetype": "integral",
+      "latex": "W = \\int_{x_1}^{x_2} F_{total} \\, dx",
+      "outputs": [
+        "W"
+      ],
+      "inputs": [
+        "x_1",
+        "x_2",
+        "F_{total}"
+      ],
+      "loopMeta": "var = x, bounds = [x_1, x_2]",
+      "assumptions": "Evaluated numerically via trapezoidal quadrature"
+    },
+    {
+      "id": "eq_4",
+      "ioAuto": true,
+      "typeAuto": true,
+      "name": "Non-linear relaxation update",
+      "author": "",
+      "year": "",
+      "eqNumber": "4",
+      "source": "Fixed-point convergence",
+      "archetype": "convergence",
+      "latex": "T_{new} = 0.5 T_{old} + 0.02 W",
+      "outputs": [
+        "T"
+      ],
+      "inputs": [
+        "T",
+        "W"
+      ],
+      "loopMeta": "tol = 1e-6, max_iter = 500",
+      "assumptions": "Iterates until |T_new - T_old| < tol"
+    },
+    {
+      "id": "eq_5",
+      "ioAuto": true,
+      "typeAuto": false,
+      "name": "Van der Waals equation of state",
+      "author": "van der Waals",
+      "year": "1873",
+      "eqNumber": "5",
+      "source": "Over de continuiteit van den gas- en vloeistoftoestand",
+      "archetype": "implicit",
+      "latex": "\\left(p + \\frac{a}{v^2}\\right)\\left(v - b\\right) = R_u T_g",
+      "outputs": [
+        "v"
+      ],
+      "inputs": [
+        "p",
+        "a",
+        "b",
+        "R_u",
+        "T_g"
+      ],
+      "loopMeta": "method = newton, tol = 1e-10, max_iter = 50, min = b",
+      "assumptions": "Below the critical temperature the cubic has three roots: liquid, unstable and vapour. The initial guess picks the branch"
+    }
+  ],
+  "variableMeta": {
+    "y": {
+      "initVal": "1.0",
+      "units": "-",
+      "desc": "Marching state variable (y_0 = 1)"
+    },
+    "N": {
+      "initVal": "5",
+      "units": "-",
+      "desc": "Number of force elements"
+    },
+    "f_i": {
+      "initVal": "10.0",
+      "units": "N",
+      "desc": "Element force array"
+    },
+    "F_{total}": {
+      "initVal": "0.0",
+      "units": "N",
+      "desc": "Accumulated total force"
+    },
+    "x_1": {
+      "initVal": "0.0",
+      "units": "m",
+      "desc": "Lower integration bound"
+    },
+    "x_2": {
+      "initVal": "2.0",
+      "units": "m",
+      "desc": "Upper integration bound"
+    },
+    "W": {
+      "initVal": "0.0",
+      "units": "J",
+      "desc": "Integrated work output"
+    },
+    "T": {
+      "initVal": "300.0",
+      "units": "K",
+      "desc": "Converged temperature state"
+    },
+    "p": {
+      "initVal": "5e6",
+      "units": "Pa",
+      "desc": "Gas pressure"
+    },
+    "a": {
+      "initVal": "0.3640",
+      "units": "Pa m^6/mol^2",
+      "desc": "Van der Waals attraction constant (CO2)"
+    },
+    "b": {
+      "initVal": "4.267e-5",
+      "units": "m^3/mol",
+      "desc": "Van der Waals co-volume (CO2)"
+    },
+    "R_u": {
+      "initVal": "8.314",
+      "units": "J/(mol·K)",
+      "desc": "Universal gas constant"
+    },
+    "T_g": {
+      "initVal": "280",
+      "units": "K",
+      "desc": "Gas temperature"
+    },
+    "v": {
+      "initVal": "4.66e-4",
+      "units": "m^3/mol",
+      "desc": "Molar volume (start = ideal-gas volume, vapour branch)"
+    }
+  },
+  "report": {},
+  "flowchart": {}
+}

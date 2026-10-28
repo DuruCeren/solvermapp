@@ -1,0 +1,43 @@
+\begin{tikzpicture}[
+  node distance=6mm, >={Stealth[length=2.2mm]}, font=\small,
+  every node/.style={align=center},
+  term/.style={draw, rounded rectangle, minimum height=7mm, inner xsep=5mm, fill=blue!6},
+  io/.style={draw, trapezium, trapezium left angle=72, trapezium right angle=108, trapezium stretches body, minimum height=8mm, inner xsep=2mm, fill=green!6},
+  proc/.style={draw, rectangle, minimum height=8mm, minimum width=30mm, inner xsep=3mm},
+  dec/.style={draw, diamond, aspect=2.4, inner sep=1pt, fill=orange!8},
+  lbl/.style={font=\footnotesize, inner sep=2pt}]
+  \node[term] (n1) {Start};
+  \node[io, below=of n1] (n2) {Read inputs \\ $N$, $f_i$, $x_1$, $x_2$ \\ $p$, $a$, $b$, $R_u$ \\ $T_g$};
+  \node[proc, below=of n2] (n3) {Set start values \\ $y$ = 1.0, $T$ = 300.0};
+  \node[proc, below=of n3] (n4) {$n = 0$};
+  \node[proc, below=of n4] (n5) {Update $y$, $n = n + 1$ \\ {\footnotesize Eq.~(1) \textperiodcentered{} State step recurrence}};
+  \node[dec, below=of n5] (n6) {$n < 10$ ?};
+  \node[proc, below=of n6] (n7) {Compute $F_{total}$ by summation \\ {\footnotesize Eq.~(2) \textperiodcentered{} Total force summation}};
+  \node[proc, below=of n7] (n8) {Initial guess for $v$ \\ {\footnotesize branch $b \le v$}};
+  \node[proc, below=of n8] (n9) {Newton step: $v \leftarrow v - R(v) / R'(v)$ \\ {\footnotesize Eq.~(3) \textperiodcentered{} Van der Waals equation of state}};
+  \node[dec, below=of n9] (n10) {Step < $10^{-10}$ ? \\ {\footnotesize or 50 iterations}};
+  \node[proc, below=of n10] (n11) {Compute $W$ by integration \\ {\footnotesize Eq.~(4) \textperiodcentered{} Boundary work integral}};
+  \node[proc, below=of n11] (n12) {Update $T$ \\ {\footnotesize Eq.~(5) \textperiodcentered{} Non-linear relaxation update}};
+  \node[dec, below=of n12] (n13) {Change in $T$ < $10^{-6}$ ? \\ {\footnotesize or 500 iterations}};
+  \node[io, below=of n13] (n14) {Write results \\ $v$};
+  \node[term, below=of n14] (n15) {End};
+  \coordinate (E) at (current bounding box.east);
+  \coordinate (L0) at ([xshift=6mm]E);
+  \draw[->] (n1) -- (n2);
+  \draw[->] (n2) -- (n3);
+  \draw[->] (n3) -- (n4);
+  \draw[->] (n4) -- (n5);
+  \draw[->] (n5) -- (n6);
+  \draw[->] (n6) -- node[lbl, right] {no} (n7);
+  \draw[->] (n7) -- (n8);
+  \draw[->] (n8) -- (n9);
+  \draw[->] (n9) -- (n10);
+  \draw[->] (n10) -- node[lbl, right] {yes} (n11);
+  \draw[->] (n11) -- (n12);
+  \draw[->] (n12) -- (n13);
+  \draw[->] (n13) -- node[lbl, right] {yes} (n14);
+  \draw[->] (n14) -- (n15);
+  \draw[->] (n6.east) -- node[lbl, above] {yes} (n6.east -| L0) |- (n5.east);
+  \draw[->] (n10.east) -- node[lbl, above] {no} (n10.east -| L0) |- (n9.east);
+  \draw[->] (n13.east) -- node[lbl, above] {no} (n13.east -| L0) |- (n12.east);
+\end{tikzpicture}

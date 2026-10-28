@@ -1,0 +1,239 @@
+{
+  "equations": [
+    {
+      "id": "eq_mvnrkqdw2khd",
+      "name": "Heat flux",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "explicit",
+      "latex": "\\dot{Q} = h A (T - T_\\infty)",
+      "outputs": [
+        "\\dot{Q}"
+      ],
+      "inputs": [
+        "h",
+        "A",
+        "T",
+        "T_\\infty"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvnrkqdwadfm",
+      "name": "Cooling",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "ode",
+      "latex": "\\frac{dT}{dt} = -\\frac{\\dot{Q}}{m c_p}",
+      "outputs": [
+        "T"
+      ],
+      "inputs": [
+        "\\dot{Q}",
+        "m",
+        "c_p",
+        "t"
+      ],
+      "loopMeta": "t = 0..600, steps = 60, method = rk4",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvnrkqdwoopi",
+      "name": "Forcing",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "explicit",
+      "latex": "F = F_0 \\sin(\\omega t)",
+      "outputs": [
+        "F"
+      ],
+      "inputs": [
+        "F_0",
+        "\\omega",
+        "t"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvnrkqdwpi7l",
+      "name": "Position",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "ode",
+      "latex": "\\frac{dx}{dt} = v",
+      "outputs": [
+        "x"
+      ],
+      "inputs": [
+        "v",
+        "t"
+      ],
+      "loopMeta": "t = 0..3, steps = 300",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvnrkqdw8bib",
+      "name": "Velocity",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "ode",
+      "latex": "\\frac{dv}{dt} = -\\omega^2 x + F",
+      "outputs": [
+        "v"
+      ],
+      "inputs": [
+        "\\omega",
+        "x",
+        "F",
+        "t"
+      ],
+      "loopMeta": "t = 0..3, steps = 300",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvnrkqdw7mqi",
+      "name": "Energy",
+      "author": "",
+      "year": "",
+      "eqNumber": "",
+      "source": "",
+      "archetype": "explicit",
+      "latex": "E_k = \\frac{1}{2} v^2 + \\frac{1}{2} \\omega^2 x^2",
+      "outputs": [
+        "E_k"
+      ],
+      "inputs": [
+        "v",
+        "\\omega",
+        "x"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    }
+  ],
+  "variableMeta": {
+    "T": {
+      "initVal": "373",
+      "units": "K",
+      "desc": "Temperature"
+    },
+    "h": {
+      "initVal": "10",
+      "units": "W/(m^2 K)",
+      "desc": "Heat transfer coefficient"
+    },
+    "A": {
+      "initVal": "0.01",
+      "units": "m^2",
+      "desc": "Area"
+    },
+    "m": {
+      "initVal": "0.1",
+      "units": "kg",
+      "desc": "Mass"
+    },
+    "c_p": {
+      "initVal": "900",
+      "units": "J/(kg K)",
+      "desc": "Heat capacity"
+    },
+    "T_\\infty": {
+      "initVal": "293",
+      "units": "K",
+      "desc": "Ambient"
+    },
+    "\\dot{Q}": {
+      "initVal": "0",
+      "units": "W",
+      "desc": "Heat flux"
+    },
+    "t": {
+      "initVal": "0",
+      "units": "s",
+      "desc": "Time",
+      "codeName": "time"
+    },
+    "x": {
+      "initVal": "1",
+      "units": "m",
+      "desc": "Position"
+    },
+    "v": {
+      "initVal": "0",
+      "units": "m/s",
+      "desc": "Velocity"
+    },
+    "\\omega": {
+      "initVal": "2",
+      "units": "1/s",
+      "desc": "Angular frequency"
+    },
+    "F": {
+      "initVal": "0",
+      "units": "m/s^2",
+      "desc": "Forcing"
+    },
+    "F_0": {
+      "initVal": "0.5",
+      "units": "m/s^2",
+      "desc": "Forcing amplitude"
+    },
+    "E_k": {
+      "initVal": "0",
+      "units": "m^2/s^2",
+      "desc": "Energy"
+    }
+  },
+  "report": {
+    "title": "ODE systems: cooling with a heat-flux equation, forced oscillator",
+    "author": "",
+    "nomenclature": true,
+    "equations": true,
+    "algorithm": true,
+    "flowchart": true,
+    "references": true,
+    "values": true,
+    "grouping": "role",
+    "mode": "standalone"
+  },
+  "flowchart": {
+    "numbers": true,
+    "titles": true
+  }
+}

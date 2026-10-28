@@ -1,0 +1,19 @@
+# Test output (generated solvers, CSV files, compiled programs)
+tests/.out/
+__pycache__/
+*.pyc
+
+# Files written by running exported solvers
+*.exe
+ode_system_*.csv
+solvermapp.py
+solvermapp.m
+solvermapp.f90
+*.mod
+
+# Editors and systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

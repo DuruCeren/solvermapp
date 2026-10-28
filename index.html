@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SolverMapp</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%20-8%2048%2048%22%3E%3Crect%20y%3D%22-8%22%20width%3D%2248%22%20height%3D%2248%22%20rx%3D%229%22%20fill%3D%22%23e6eef7%22/%3E%3Cpath%20d%3D%22M17.97%203.5%20L17.5%203.92%20L16.9%204.33%20L16.17%204.75%20L15.33%205.17%20L14.4%205.58%20L13.41%206%20L12.36%206.42%20L11.28%206.83%20L10.2%207.25%20L9.13%207.67%20L8.11%208.08%20L7.14%208.5%20L6.26%208.92%20L5.47%209.33%20L4.8%209.75%20L4.25%2010.17%20L3.85%2010.58%20L3.6%2011%20L3.5%2011.42%20L3.56%2011.83%20L3.77%2012.25%20L4.14%2012.67%20L4.64%2013.08%20L5.28%2013.5%20L6.04%2013.92%20L6.9%2014.33%20L7.85%2014.75%20L8.86%2015.17%20L9.92%2015.58%20L11%2016%20L12.08%2016.42%20L13.14%2016.83%20L14.15%2017.25%20L15.1%2017.67%20L15.96%2018.08%20L16.72%2018.5%20L17.36%2018.92%20L17.86%2019.33%20L18.23%2019.75%20L18.44%2020.17%20L18.5%2020.58%20L18.4%2021%20L18.15%2021.42%20L17.75%2021.83%20L17.2%2022.25%20L16.53%2022.67%20L15.74%2023.08%20L14.86%2023.5%20L13.89%2023.92%20L12.87%2024.33%20L11.8%2024.75%20L10.72%2025.17%20L9.64%2025.58%20L8.59%2026%20L7.6%2026.42%20L6.67%2026.83%20L5.83%2027.25%20L5.1%2027.67%20L4.5%2028.08%20L4.03%2028.5%22%20fill%3D%22none%22%20stroke%3D%22%232f5d8a%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3Cline%20x1%3D%2225.5%22%20y1%3D%2228.5%22%20x2%3D%2225.5%22%20y2%3D%223.5%22%20stroke%3D%22%232f5d8a%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22/%3E%3Ccircle%20cx%3D%2225.5%22%20cy%3D%223.5%22%20r%3D%222.3%22%20fill%3D%22%232f5d8a%22/%3E%3Cline%20x1%3D%2230.25%22%20y1%3D%2228.5%22%20x2%3D%2230.25%22%20y2%3D%2212.75%22%20stroke%3D%22%232f5d8a%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22/%3E%3Ccircle%20cx%3D%2230.25%22%20cy%3D%2212.75%22%20r%3D%222.3%22%20fill%3D%22%232f5d8a%22/%3E%3Cline%20x1%3D%2235%22%20y1%3D%2228.5%22%20x2%3D%2235%22%20y2%3D%2222%22%20stroke%3D%22%232f5d8a%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22/%3E%3Ccircle%20cx%3D%2235%22%20cy%3D%2222%22%20r%3D%222.3%22%20fill%3D%22%232f5d8a%22/%3E%3Cline%20x1%3D%2239.75%22%20y1%3D%2228.5%22%20x2%3D%2239.75%22%20y2%3D%2212.75%22%20stroke%3D%22%232f5d8a%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22/%3E%3Ccircle%20cx%3D%2239.75%22%20cy%3D%2212.75%22%20r%3D%222.3%22%20fill%3D%22%232f5d8a%22/%3E%3Cline%20x1%3D%2244.5%22%20y1%3D%2228.5%22%20x2%3D%2244.5%22%20y2%3D%223.5%22%20stroke%3D%22%232f5d8a%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22/%3E%3Ccircle%20cx%3D%2244.5%22%20cy%3D%223.5%22%20r%3D%222.3%22%20fill%3D%22%232f5d8a%22/%3E%3C/svg%3E">
+
+  <!-- KaTeX (MIT License) -->
+  <!-- If these cannot load (offline, blocked), equations are shown as LaTeX source and a notice offers to try again. -->
+  <link id="katexCss" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script id="katexJs" src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+
+  <link rel="stylesheet" href="css/solvermapp.css">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="app-bar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true" title="SolverMapp"><svg viewBox="0 0 48 32"><path d="M17.97 3.5 L17.5 3.92 L16.9 4.33 L16.17 4.75 L15.33 5.17 L14.4 5.58 L13.41 6 L12.36 6.42 L11.28 6.83 L10.2 7.25 L9.13 7.67 L8.11 8.08 L7.14 8.5 L6.26 8.92 L5.47 9.33 L4.8 9.75 L4.25 10.17 L3.85 10.58 L3.6 11 L3.5 11.42 L3.56 11.83 L3.77 12.25 L4.14 12.67 L4.64 13.08 L5.28 13.5 L6.04 13.92 L6.9 14.33 L7.85 14.75 L8.86 15.17 L9.92 15.58 L11 16 L12.08 16.42 L13.14 16.83 L14.15 17.25 L15.1 17.67 L15.96 18.08 L16.72 18.5 L17.36 18.92 L17.86 19.33 L18.23 19.75 L18.44 20.17 L18.5 20.58 L18.4 21 L18.15 21.42 L17.75 21.83 L17.2 22.25 L16.53 22.67 L15.74 23.08 L14.86 23.5 L13.89 23.92 L12.87 24.33 L11.8 24.75 L10.72 25.17 L9.64 25.58 L8.59 26 L7.6 26.42 L6.67 26.83 L5.83 27.25 L5.1 27.67 L4.5 28.08 L4.03 28.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><line x1="25.5" y1="28.5" x2="25.5" y2="3.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="25.5" cy="3.5" r="2.3" fill="currentColor"/><line x1="30.25" y1="28.5" x2="30.25" y2="12.75" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="30.25" cy="12.75" r="2.3" fill="currentColor"/><line x1="35" y1="28.5" x2="35" y2="22" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="35" cy="22" r="2.3" fill="currentColor"/><line x1="39.75" y1="28.5" x2="39.75" y2="12.75" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="39.75" cy="12.75" r="2.3" fill="currentColor"/><line x1="44.5" y1="28.5" x2="44.5" y2="3.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="44.5" cy="3.5" r="2.3" fill="currentColor"/></svg></span>
+      <h1 class="brand-name">SolverMapp</h1>
+    </div>
+
+    <nav class="tabs" aria-label="Steps">
+      <button id="tabBtnGuide" class="tab tab-guide active" onclick="switchTab('guide')" title="How it works" aria-current="page">Guide</button>
+      <div id="grpEnter" class="tab-grp grp-enter" role="group" aria-labelledby="grpEnterLabel">
+        <span id="grpEnterLabel" class="grp-label" title="You fill these in">You enter</span>
+        <button id="tabBtnVault" class="tab" onclick="switchTab('vault')" title="Step 1 · Type the equations"><span class="num" aria-hidden="true">1</span>Equations</button>
+        <button id="tabBtnVars"  class="tab" onclick="switchTab('vars')" title="Step 2 · Values, units and names"><span class="num" aria-hidden="true">2</span>Variables</button>
+      </div>
+      <span class="grp-flow" aria-hidden="true" title="Your equations and values make everything on the right"><svg viewBox="0 0 22 12"><path d="M1 6h18M14.5 1.5 19.5 6l-5 4.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <div id="grpGet" class="tab-grp grp-get" role="group" aria-labelledby="grpGetLabel">
+        <span id="grpGetLabel" class="grp-label" title="Made for you from steps 1 and 2">You get</span>
+        <button id="tabBtnArch"   class="tab" onclick="switchTab('arch')" title="Step 3 · How the equations connect"><span class="num" aria-hidden="true">3</span>Plan</button>
+        <button id="tabBtnFlow"   class="tab" onclick="switchTab('flow')" title="Step 4 · The solution as a diagram"><span class="num" aria-hidden="true">4</span>Flowchart</button>
+        <button id="tabBtnCode"   class="tab" onclick="switchTab('code')" title="Step 5 · Python, MATLAB, Fortran"><span class="num" aria-hidden="true">5</span>Code</button>
+        <button id="tabBtnReport" class="tab" onclick="switchTab('report')" title="Step 6 · LaTeX write-up"><span class="num" aria-hidden="true">6</span>Report</button>
+      </div>
+    </nav>
+
+    <div class="toolbar">
+      <div id="saveStatusBadge" class="status" role="status" title="Every change is kept in this browser automatically. To keep a copy or move the project to another computer, use File › Export project."><span class="dot"></span><span>Saved in this browser</span></div>
+      <input type="file" id="jsonFileInput" accept=".json" hidden onchange="importJSON(event)">
+      <button id="fileMenuBtn" class="btn btn-quiet file-btn" onclick="toggleFileMenu()" aria-haspopup="menu" aria-expanded="false" title="Import, export, new project">File <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button id="themeToggleBtn" class="btn btn-quiet" onclick="toggleTheme()" title="Switch light / dark">Dark</button>
+    </div>
+  </header>
+
+  <div id="layout" class="layout guide-mode">
+
+    <!-- ============================ EQUATION LIST ============================ -->
+    <aside class="sidebar" aria-label="Equations">
+      <div class="sidebar-head">
+        <div class="sidebar-head-title">
+          <button id="sideToggleBtn" class="btn btn-small btn-quiet side-toggle" onclick="toggleSidebar()" title="Collapse the list (Ctrl+B)" aria-label="Collapse the equation list">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 4h11M2.5 8h11M2.5 12h11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </button>
+          <h2 class="section-title">Equations <span id="eqCountBadge" class="count">0</span></h2>
+        </div>
+        <button class="btn btn-small" onclick="newEquation()" title="New equation"><span aria-hidden="true">+</span><span class="sidebar-new-label"> New</span></button>
+      </div>
+      <ol id="equationList" class="eq-list" aria-label="Equations, in order"></ol>
+    </aside>
+    <div id="sideResizer" class="side-resizer" title="Drag to resize · double-click to collapse" aria-hidden="true"></div>
+
+    <div class="content">
+      <div id="mathNotice" class="math-notice" role="status" hidden>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8 14.6 13.5H1.4Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 6.2v3.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11.6" r=".85" fill="currentColor"/></svg>
+        <p><b>Equations are shown as LaTeX source.</b> <span id="mathNoticeText">The math display (KaTeX) could not load. It needs an internet connection; everything else works.</span></p>
+        <button id="mathRetryBtn" class="btn btn-small" onclick="retryMath()">Try again</button>
+        <button class="btn btn-small btn-quiet" onclick="dismissMathNotice()" aria-label="Hide this notice">×</button>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- TAB 1: EQUATION CARD + ITS VARIABLES                              -->
+      <!-- ================================================================= -->
+      <main id="viewGuide" class="page page-wide guide">
+        <section class="panel guide-start">
+          <div class="guide-brand">
+            <span class="guide-logo" aria-hidden="true"><svg viewBox="0 0 48 32"><path d="M17.97 3.5 L17.5 3.92 L16.9 4.33 L16.17 4.75 L15.33 5.17 L14.4 5.58 L13.41 6 L12.36 6.42 L11.28 6.83 L10.2 7.25 L9.13 7.67 L8.11 8.08 L7.14 8.5 L6.26 8.92 L5.47 9.33 L4.8 9.75 L4.25 10.17 L3.85 10.58 L3.6 11 L3.5 11.42 L3.56 11.83 L3.77 12.25 L4.14 12.67 L4.64 13.08 L5.28 13.5 L6.04 13.92 L6.9 14.33 L7.85 14.75 L8.86 15.17 L9.92 15.58 L11 16 L12.08 16.42 L13.14 16.83 L14.15 17.25 L15.1 17.67 L15.96 18.08 L16.72 18.5 L17.36 18.92 L17.86 19.33 L18.23 19.75 L18.44 20.17 L18.5 20.58 L18.4 21 L18.15 21.42 L17.75 21.83 L17.2 22.25 L16.53 22.67 L15.74 23.08 L14.86 23.5 L13.89 23.92 L12.87 24.33 L11.8 24.75 L10.72 25.17 L9.64 25.58 L8.59 26 L7.6 26.42 L6.67 26.83 L5.83 27.25 L5.1 27.67 L4.5 28.08 L4.03 28.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><line x1="25.5" y1="28.5" x2="25.5" y2="3.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="25.5" cy="3.5" r="2.3" fill="currentColor"/><line x1="30.25" y1="28.5" x2="30.25" y2="12.75" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="30.25" cy="12.75" r="2.3" fill="currentColor"/><line x1="35" y1="28.5" x2="35" y2="22" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="35" cy="22" r="2.3" fill="currentColor"/><line x1="39.75" y1="28.5" x2="39.75" y2="12.75" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="39.75" cy="12.75" r="2.3" fill="currentColor"/><line x1="44.5" y1="28.5" x2="44.5" y2="3.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="44.5" cy="3.5" r="2.3" fill="currentColor"/></svg></span>
+            <div>
+              <h2>SolverMapp</h2>
+              <p class="guide-logo-note">From equations to a solver.</p>
+            </div>
+          </div>
+          <div class="flow">
+            <div class="flow-col flow-enter">
+              <div class="flow-head">You enter</div>
+              <ol class="flow-list">
+                <li><b>Equations</b><span>one card each, in LaTeX</span><span class="flow-ex" data-tex="P V = n R T"></span></li>
+                <li><b>Values</b><span>only for <span class="chip role-input">input</span> variables</span></li>
+              </ol>
+            </div>
+            <div class="flow-arrow" aria-hidden="true">→</div>
+            <div class="flow-col flow-get">
+              <div class="flow-head">You get</div>
+              <ul class="flow-list">
+                <li><b>Plan</b><span>how it connects</span></li>
+                <li><b>Flowchart</b><span>.svg .png .tex</span></li>
+                <li><b>Code</b><span>Python · MATLAB · Fortran</span></li>
+                <li><b>Report</b><span>LaTeX</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="guide-actions">
+            <button class="btn btn-primary" onclick="newEquation()">+ New equation</button>
+            <button class="btn" onclick="resetToDemo()" title="Replace the current project with the demo (can be undone)">See an example</button>
+            <button class="btn btn-quiet" onclick="startTour()">Show me around</button>
+            <button class="btn btn-quiet" onclick="switchTab('vault')">My equations →</button>
+          </div>
+        </section>
+
+        <details class="guide-cheat">
+          <summary>Cheatsheet</summary>
+        <div class="guide-grid">
+          <section class="panel guide-card">
+            <h3>Workflow</h3>
+            <ol class="guide-steps">
+              <li><b>Equations</b> (enter): one card per equation, in LaTeX.</li>
+              <li><b>Variables</b> (enter): value, unit, size, code name, description.</li>
+              <li><b>Plan</b> (get): connections and order of solution.</li>
+              <li><b>Flowchart</b> (get): .svg, .png, TikZ .tex, Mermaid.</li>
+              <li><b>Code</b> (get): Python, MATLAB, Fortran.</li>
+              <li><b>Report</b> (get): LaTeX write-up with references.</li>
+            </ol>
+          </section>
+
+          <section class="panel guide-card">
+            <h3>Write it like this · the type follows</h3>
+            <p class="guide-note">Plain math or LaTeX. Plain: <code>*</code> <code>/</code> <code>^</code> <code>( )</code>, <code>sqrt(x)</code>, <code>exp</code>, <code>ln</code>, <code>log10</code>, <code>sin</code>…; <code>rho</code> → <span data-tex="\rho"></span>, <code>c_p</code> → <span data-tex="c_p"></span>, <code>T_inf</code> → <span data-tex="T_\infty"></span>, <code>Re</code> → <span data-tex="R_e"></span>, <code>dT/dt</code> → <span data-tex="\frac{dT}{dt}"></span>, <code>d2x/dt2</code> → <span data-tex="\frac{d^2x}{dt^2}"></span>. Sums, integrals and vectors need LaTeX.</p>
+            <table class="guide-table">
+              <thead><tr><th>You write</th><th>Type</th><th>Solved by</th></tr></thead>
+              <tbody>
+                <tr><td data-tex="y = a x + b"></td><td>= Explicit</td><td>direct assignment</td></tr>
+                <tr><td data-tex="y_{n+1} = y_n + h\,f"></td><td>↻ Marching loop</td><td><code>N_steps</code> repetitions</td></tr>
+                <tr><td data-tex="T_{new} = 0.5\,T_{old} + c"></td><td>◎ Convergence loop</td><td>until the change &lt; <code>tol</code></td></tr>
+                <tr><td data-tex="S = \sum_{i=1}^{N} x_i"></td><td>Σ Summation</td><td>a loop over <i>i</i></td></tr>
+                <tr><td data-tex="W = \int_{x_1}^{x_2} F \, dx"></td><td>∫ Integral</td><td>trapezoidal rule</td></tr>
+                <tr><td data-tex="P V = n R T"></td><td>⊘ Implicit</td><td>Newton–Raphson for the first output</td></tr>
+                <tr><td data-tex="\mathbf{K}\mathbf{u} = \mathbf{F}"></td><td>⊘ Implicit</td><td>a direct linear solve, when linear in the unknown</td></tr>
+                <tr><td data-tex="\frac{dT}{dt} = -k\,(T - T_\infty)"></td><td>ẏ ODE</td><td>RK4 (or Euler)</td></tr>
+                <tr><td data-tex="m\,\frac{d^2x}{dt^2} = -k x - c\,\frac{dx}{dt}"></td><td>ẏ ODE, 2nd order</td><td>RK4 on <span data-tex="x"></span> and its rate <span data-tex="\dot{x}"></span>; also <span data-tex="m\ddot{x} = \dots"></span></td></tr>
+                <tr><td data-tex="\mu(T) = \mu_0\, e^{B/T}"></td><td>ƒ Function</td><td>a function; use <span data-tex="\mu"></span> or <span data-tex="\mu(T)"></span> elsewhere</td></tr>
+              </tbody>
+            </table>
+            <p class="guide-note">Implicit = the unknown is not alone on the left (<span data-tex="x = \cos x"></span>, <span data-tex="c^2 = a^2 + b^2"></span>). To change the type, change the notation: <span data-tex="x_{new} = \cos x_{old}"></span> iterates instead of using Newton. Wrong outputs? Edit <b>Solves for</b>; <b>Find again</b> undoes it.</p>
+          </section>
+
+          <section class="panel guide-card">
+            <h3>Settings</h3>
+            <dl class="guide-dl">
+              <dt>Marching loop</dt><dd><code>N_steps = 100</code></dd>
+              <dt>Convergence loop</dt><dd><code>tol = 1e-6, max_iter = 500</code></dd>
+              <dt>Summation</dt><dd>bounds from <span data-tex="\sum_{i=1}^{N}"></span></dd>
+              <dt>Integral</dt><dd>bounds from <span data-tex="\int_a^b"></span>, <code>n = 100</code> intervals</dd>
+              <dt>Implicit</dt><dd><code>method = newton, tol = 1e-10, max_iter = 50</code>, and <code>guess</code>, <code>min</code>, <code>max</code> to pick the branch (numbers, variables or LaTeX: <code>min = b</code>). The root plot on the card shows every root: click one to use it.</dd>
+              <dt>ODE</dt><dd><code>t = 0..t_end, steps = 100, method = rk4</code> (or <code>euler</code>), <code>save = 10</code> writes a CSV every 10 steps. The state's Value is its initial value. A second-order ODE has two states, <span data-tex="x"></span> and <span data-tex="\dot{x}"></span>: give both Values. On its right side, <span data-tex="\frac{dx}{dt}"></span> means <span data-tex="\dot{x}"></span>; elsewhere write <span data-tex="\dot{x}"></span>.</dd>
+            </dl>
+          </section>
+
+          <section class="panel guide-card">
+            <h3>Switches · Applies when</h3>
+            <p>Give two or more equations the same output and a condition each; the first that holds is used.</p>
+            <div class="guide-example">
+              <div><span data-tex="f = \frac{64}{R_e}"></span><small>Applies when <code>R_e &lt; 2300</code></small></div>
+              <div><span data-tex="\frac{1}{\sqrt{f}} = -2\log_{10}(\dots)"></span><small>Applies when <code>otherwise</code></small></div>
+            </div>
+            <p class="guide-note">Without an <code>otherwise</code> case the Value is kept.</p>
+          </section>
+
+          <section class="panel guide-card">
+            <h3>Variables</h3>
+            <dl class="guide-dl">
+              <dt>Roles</dt><dd><span class="chip role-input">input</span> <span class="chip role-state">state</span> <span class="chip role-inter">intermediate</span> <span class="chip role-output">output</span>, from how equations use them.</dd>
+              <dt>Value</dt><dd>inputs, initial values and guesses: <code>1.5</code> · vector <code>1, 2, 3</code> · matrix <code>1, 2; 3, 4</code> · identity <code>I</code></dd>
+              <dt>Unit</dt><dd><code>W/(m·K)</code>, <code>kg m^-3</code>, <code>m/s^2</code>, <code>kPa</code>, <code>°C</code>; <code>1</code> or <code>-</code> = dimensionless; empty = not given</dd>
+              <dt>Size</dt><dd>empty = scalar, <code>3</code> = vector, <code>3 x 3</code> or <code>N x 2</code> = matrix</dd>
+              <dt>Code name</dt><dd>the name in exported code (empty = automatic). Fortran ignores case: <code>T</code> and <code>t</code> clash.</dd>
+              <dt>To check</dt><dd>the filter that lists missing units, sizes and descriptions and bad code names.</dd>
+            </dl>
+          </section>
+
+          <section class="panel guide-card">
+            <h3>Vectors and matrices</h3>
+            <p>Bold symbols are arrays: give their Size.</p>
+            <table class="guide-table compact">
+              <tbody>
+                <tr><td data-tex="\mathbf{a} \cdot \mathbf{b}"></td><td>dot product</td><td data-tex="\mathbf{a} \times \mathbf{b}"></td><td>cross product</td></tr>
+                <tr><td data-tex="\mathbf{a} \odot \mathbf{b}"></td><td>element-wise</td><td data-tex="\mathbf{K}\mathbf{u}"></td><td>matrix product</td></tr>
+                <tr><td data-tex="\mathbf{K}^T"></td><td>transpose</td><td data-tex="\mathbf{K}^{-1}"></td><td>inverse</td></tr>
+                <tr><td data-tex="\|\mathbf{a}\|"></td><td>norm</td><td data-tex="\frac{d\mathbf{y}}{dt} = \mathbf{M}\mathbf{y}"></td><td>vector ODE</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="panel guide-card">
+            <h3>Index notation</h3>
+            <p>Declare indices once in the Variables tab: <code>i, j = 1..N; k = 1..M</code>. Then:</p>
+            <dl class="guide-dl">
+              <dt>Elements</dt><dd><span data-tex="m_i"></span>, <span data-tex="k_{ij}"></span>, <span data-tex="x_{i+1}"></span>; <span data-tex="\mathbf{r}_i"></span> = row <i>i</i> (Size <code>N x 2</code>)</dd>
+              <dt>For every i</dt><dd>a free index on the left: <span data-tex="\frac{d\mathbf{v}_i}{dt} = \dots"></span> becomes a loop</dd>
+              <dt>Sums</dt><dd><span data-tex="\sum_j"></span>, <span data-tex="\sum_{j=1}^{i}"></span>, <span data-tex="\sum_{j \ne i}"></span>, <span data-tex="\sum_{i<j}"></span>; a sum covers the next term (use parentheses for more). The card shows it as <b>= Explicit · index sum</b>; a sum over a letter that is not declared is a <b>Σ Summation</b> loop</dd>
+            </dl>
+          </section>
+
+          <section class="panel guide-card">
+            <h3>Equation list</h3>
+            <table class="guide-keys">
+              <tbody>
+                <tr><td>Drag · <kbd>Ctrl</kbd>+drag</td><td>move · copy</td></tr>
+                <tr><td><kbd>Alt</kbd>+<kbd>↑</kbd> <kbd>↓</kbd></td><td>move up / down</td></tr>
+                <tr><td><kbd>Ctrl</kbd>+<kbd>C</kbd> <kbd>X</kbd> <kbd>V</kbd></td><td>copy, cut, paste below (also into another project)</td></tr>
+                <tr><td><kbd>Ctrl</kbd>+<kbd>D</kbd> · <kbd>Del</kbd></td><td>duplicate · delete (Undo in the message)</td></tr>
+                <tr><td><kbd>Ctrl</kbd>/<kbd>Shift</kbd>+click · <kbd>Ctrl</kbd>+<kbd>A</kbd></td><td>select several · all</td></tr>
+                <tr><td><kbd>↑</kbd> <kbd>↓</kbd></td><td>open previous / next</td></tr>
+                <tr><td><kbd>Ctrl</kbd>+<kbd>B</kbd> · ☰</td><td>collapse / expand the list</td></tr>
+                <tr><td>Right-click</td><td>all of the above in a menu</td></tr>
+              </tbody>
+            </table>
+            <p class="guide-note">Numbers <b>#1, #2…</b> are the order in the list, used in the report and flowchart. Paste LaTeX text to make new equations, one per line.</p>
+          </section>
+
+          <section class="panel guide-card">
+            <h3>Files</h3>
+            <dl class="guide-dl">
+              <dt>Saved in this browser</dt><dd>every change is kept here automatically, on this computer and browser only</dd>
+              <dt>File › Export project</dt><dd>the whole project as a <code>.json</code> file, to keep or share (<kbd>Ctrl</kbd>+<kbd>S</kbd>)</dd>
+              <dt>File › Import file</dt><dd>a project replaces this one; a card is added to it (<kbd>Ctrl</kbd>+<kbd>O</kbd>). Examples are in the <code>examples</code> folder</dd>
+              <dt>File › Export open card</dt><dd>one equation with its variables</dd>
+              <dt>File › New project</dt><dd>an empty project with one empty card (can be undone)</dd>
+              <dt>Code</dt><dd><code>solvermapp.py</code> / <code>.m</code> / <code>.f90</code>, with Newton, RK4, sums and loops written out</dd>
+            </dl>
+          </section>
+        </div>
+        </details>
+      </main>
+
+      <main id="viewVault" class="page page-card" hidden>
+
+        <section>
+          <div id="noEquation" class="panel empty-main" hidden>
+            <h2>No equations yet</h2>
+            <p>Create one and type it in LaTeX — the type, inputs and outputs are found for you.</p>
+            <button class="btn btn-primary" onclick="newEquation()">+ New equation</button>
+          </div>
+
+          <article id="card" class="panel card" aria-label="Equation card">
+            <div class="card-title-row">
+              <span id="cardIndex" class="card-index" title="Equation number: its place in the list"></span>
+              <input id="cardName" class="card-title" type="text" placeholder="Title, e.g. Ideal gas law" autocomplete="off" aria-label="Equation title">
+              <div class="card-actions">
+                <button class="icon-btn" onclick="duplicateEquation()" title="Duplicate (Ctrl+D)" aria-label="Duplicate"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5"/></svg></button>
+                <button class="icon-btn" onclick="exportCard()" title="Export this card to a file" aria-label="Export card to a file"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4.5 6.5 8 10l3.5-3.5M2.5 13.5h11"/></svg></button>
+                <button class="icon-btn danger" onclick="deleteEquation(activeId)" title="Delete (Del) · can be undone" aria-label="Delete"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 4.5h11M6 4.5V3h4v1.5M4 4.5l.7 9h6.6l.7-9"/></svg></button>
+              </div>
+            </div>
+
+            <div class="field" style="margin-top:14px">
+              <label for="cardLatex" class="enter-label">Equation <span class="hint">plain math or LaTeX</span></label>
+              <textarea id="cardLatex" class="input mono input-main" rows="1" spellcheck="false" placeholder="Re = rho*u*D/mu"></textarea>
+              <p id="typedNote" class="help typed-note" hidden></p>
+              <p id="derivNote" class="help deriv-note" role="status" hidden></p>
+              <div class="preview">
+                <div id="cardPreview"></div>
+                <span id="cardPreviewNumber" class="preview-number"></span>
+              </div>
+              <!-- Example chips: written by renderExampleChips() with the same names as the type badges -->
+              <div id="examplesRow" class="examples" role="group" aria-label="Try an example"></div>
+            </div>
+
+            <div id="cardFoundRow" class="card-found" aria-live="polite">
+              <span class="found-tag" title="Found from the equation. To change it, change the equation or open “Outputs and inputs” below.">Found</span>
+              <span id="cardTypeBadge" class="type-badge"></span>
+              <span class="found-io"><span class="found-label">solves</span><span id="cardOutputChips" class="io-chips"></span></span>
+              <span class="found-io"><span class="found-label">needs</span><span id="cardInputChips" class="io-chips"></span></span>
+              <span id="cardUnitBadge" class="found-units"></span>
+            </div>
+            <div id="unitCheckPanel" class="unit-check" aria-live="polite" hidden></div>
+
+            <div class="card-more">
+              <details id="loopMetaField" class="more">
+                <summary>Settings <span id="sumSettings" class="more-val mono"></span></summary>
+                <div class="more-body">
+                  <input id="cardLoopMeta" class="input mono" type="text" placeholder="N_steps = 100" autocomplete="off" aria-label="Settings">
+                  <p id="loopMetaHelp" class="help" hidden><code>guess</code>, <code>min</code>, <code>max</code> pick the root, e.g. <code>guess = 0.02, min = 1e-4</code>.</p>
+                  <p id="odeHelp" class="help" hidden><code>t = 0..10, steps = 100, method = rk4</code> · <code>save = 10</code> writes a CSV. Initial value = the state's Value.</p>
+                  <p id="ode2Help" class="help" hidden></p>
+                  <div id="rootPanel" class="unit-check root-check" aria-live="polite" hidden></div>
+                </div>
+              </details>
+              <details id="secCondition" class="more">
+                <summary>Applies when <span id="sumCondition" class="more-val"></span></summary>
+                <div class="more-body">
+                  <input id="cardCondition" class="input mono" type="text" placeholder="R_e < 2300    or    otherwise" autocomplete="off" spellcheck="false" aria-label="Applies when">
+                  <p id="conditionHelp" class="help"></p>
+                </div>
+              </details>
+              <details id="secSource" class="more">
+                <summary>Source <span id="sumSource" class="more-val"></span></summary>
+                <div class="more-body">
+                  <div class="flag" title="Article: author, year, equation number in the article">
+                    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5v13M3 2.5h8.5l-2 3 2 3H3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>
+                    <input id="cardAuthor" class="flag-author" type="text" placeholder="Author" autocomplete="off" aria-label="Article author">
+                    <input id="cardYear" class="flag-year" type="text" placeholder="Year" inputmode="numeric" maxlength="8" autocomplete="off" aria-label="Article year">
+                    <label class="eq-number-label" for="cardEqNumber">Eq.</label>
+                    <input id="cardEqNumber" class="flag-year" type="text" placeholder="14.5" autocomplete="off" aria-label="Equation number in the article">
+                  </div>
+                  <textarea id="cardSource" class="input" rows="1" placeholder="Reference, e.g. Colebrook, C. F. (1939). Turbulent flow in pipes…" aria-label="Reference"></textarea>
+                </div>
+              </details>
+              <details id="secIO" class="more">
+                <summary>Outputs and inputs <span id="sumIO" class="more-val"></span></summary>
+                <div class="more-body">
+                  <div class="row">
+                    <div class="field">
+                      <label for="cardOutputs">Solves for</label>
+                      <input id="cardOutputs" class="input mono" type="text" placeholder="y" autocomplete="off" spellcheck="false">
+                    </div>
+                    <div class="field">
+                      <label for="cardInputs">Needs</label>
+                      <input id="cardInputs" class="input mono" type="text" placeholder="N, f_i" autocomplete="off" spellcheck="false">
+                    </div>
+                  </div>
+                  <p id="ioHelp" class="help"></p>
+                  <label class="switch" title="Check that both sides have the same units">
+                    <input id="cardUnitCheck" type="checkbox">
+                    <span class="switch-track" aria-hidden="true"></span>
+                    <span>Unit check</span>
+                  </label>
+                </div>
+              </details>
+              <details id="secNotes" class="more">
+                <summary>Notes <span id="sumNotes" class="more-val"></span></summary>
+                <div class="more-body">
+                  <textarea id="cardAssumptions" class="input" rows="1" placeholder="Assumptions, e.g. uniform step size" aria-label="Assumptions and notes"></textarea>
+                </div>
+              </details>
+            </div>
+          </article>
+
+          <section id="eqVarsPanel" class="panel eq-vars">
+            <div class="panel-head" style="margin-bottom:0">
+              <div>
+                <h2 class="enter-label">Values</h2>
+                <p>Fill the inputs. The rest is computed.</p>
+              </div>
+              <button class="btn btn-small btn-quiet" onclick="switchTab('vars')" title="All variables: units, sizes, code names, descriptions">All variables →</button>
+            </div>
+            <p id="eqVarsIndices" class="help eq-vars-note" hidden></p>
+            <div class="table-wrap">
+              <table class="values-table">
+                <thead id="eqVarHead"></thead>
+                <tbody id="eqVarTableBody"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </main>
+
+      <!-- ================================================================= -->
+      <!-- TAB 2: VARIABLES                                                  -->
+      <!-- ================================================================= -->
+      <main id="viewVars" class="page page-wide var-page" hidden>
+        <section class="panel">
+          <div class="panel-head" style="margin-bottom:10px">
+            <div>
+              <h2 class="enter-label">Variables</h2>
+              <p>Values, units and names of every symbol.</p>
+            </div>
+          </div>
+          <div class="var-tools">
+            <div class="index-defs">
+              <label for="indexDefs">Indices</label>
+              <input id="indexDefs" class="input mono" type="text" placeholder="i, j = 1..N; k = 1..M" autocomplete="off" spellcheck="false"
+                     title="Index notation: with i, j declared, m_i, k_{ij} and \mathbf{r}_j are elements (rows) of the arrays m, k, r; an equation with a free index on the left holds for every value of it; \sum_j, \sum_{j \ne i}, \sum_{i&lt;j} sum over the range">
+            </div>
+            <input id="varSearch" class="input var-search" type="search" placeholder="Filter by symbol, code name, unit, description, equation…" aria-label="Filter variables" autocomplete="off">
+          </div>
+          <div id="varFilters" class="filters" role="group" aria-label="Show"></div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Variable</th><th>Value</th><th>Unit</th><th title="Empty for a scalar; n for a vector, n x m for a matrix">Size</th><th>Code name</th><th>Description</th>
+                    <th title="Equations that compute this variable">Computed by</th><th title="Equations that need this variable">Used in</th></tr>
+              </thead>
+              <tbody id="variableTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+
+      <!-- ================================================================= -->
+      <!-- TAB 3: SOLVER PLAN                                                -->
+      <!-- ================================================================= -->
+      <main id="viewArch" class="page page-wide" hidden>
+        <div id="solverDiagnosticsBar" class="stats"></div>
+
+        <div class="grid-arch">
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Connections <span class="get-tag" title="Made from your equations and values. Change those to change this.">Generated</span></h2>
+                <p title="Inputs at the top, outputs at the bottom. Dashed arrows are loops. Double-click an equation to open it.">Click a node to trace it.</p>
+              </div>
+              <div class="graph-tools">
+                <div class="zoom" role="group" aria-label="Zoom">
+                  <button class="btn btn-small btn-quiet" onclick="graphZoomStep(-1)" aria-label="Zoom out">−</button>
+                  <button id="zoomResetBtn" class="btn btn-small btn-quiet" onclick="setGraphZoom(1)" title="Reset zoom">100%</button>
+                  <button class="btn btn-small btn-quiet" onclick="graphZoomStep(1)" aria-label="Zoom in">+</button>
+                  <button class="btn btn-small" onclick="graphZoomFit()">Fit</button>
+                </div>
+              </div>
+            </div>
+            <div id="graphLegend" class="graph-legend" aria-hidden="true"></div>
+            <p id="graphTrace" class="graph-trace" hidden></p>
+            <div id="graphViewport" class="graph-viewport">
+              <div id="graphStage" class="graph-stage">
+                <div id="graphCanvas" class="graph-canvas"></div>
+              </div>
+            </div>
+            <p id="graphEmpty" class="note" hidden>No connections yet. Add equations with inputs and outputs and the graph builds itself.</p>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Order of solution <span class="get-tag" title="Made from your equations and values. Change those to change this.">Generated</span></h2>
+                <p>The solver runs these steps, top to bottom.</p>
+              </div>
+            </div>
+            <div class="arch-scroll">
+              <ul id="planWarnings" class="warnings" hidden></ul>
+              <ol id="executionPlanContainer" class="steps"></ol>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <!-- ================================================================= -->
+      <!-- TAB 4: FLOWCHART                                                  -->
+      <!-- ================================================================= -->
+      <main id="viewFlow" class="page" hidden>
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Flowchart <span class="get-tag" title="Made from your equations and values. Change those to change this.">Generated</span></h2>
+              <p>The solution steps as a diagram. Download it.</p>
+            </div>
+          </div>
+          <div class="code-bar" style="margin-top:0">
+            <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap">
+              <div class="segmented" role="group" aria-label="View">
+                <button id="flowView_diagram" class="seg active" onclick="setFlowView('diagram')">Diagram</button>
+                <button id="flowView_tikz" class="seg" onclick="setFlowView('tikz')">TikZ</button>
+                <button id="flowView_mermaid" class="seg" onclick="setFlowView('mermaid')">Mermaid</button>
+              </div>
+              <label class="check"><input type="checkbox" data-flow="numbers"><span>Equation numbers</span></label>
+              <label class="check"><input type="checkbox" data-flow="titles"><span>Equation titles</span></label>
+            </div>
+            <div style="display:flex; gap:6px; flex-wrap:wrap">
+              <button id="flowCopyBtn" class="btn" onclick="copyFlow()">Copy SVG</button>
+              <button class="btn" onclick="downloadFlow('svg')" title="Vector image">.svg</button>
+              <button class="btn" onclick="downloadFlow('png')" title="Image at twice the screen size">.png</button>
+              <button class="btn" onclick="downloadFlow('tex')" title="Standalone LaTeX file with the TikZ picture; compiles to a PDF of the flowchart">.tex</button>
+              <button class="btn" onclick="downloadFlow('mmd')" title="Mermaid code for Markdown, GitHub, GitLab, Notion…">.mmd</button>
+            </div>
+          </div>
+          <p id="flowEmpty" class="note" hidden>No calculations yet: add equations in step 1.</p>
+          <div id="flowDiagram" class="flow-canvas"></div>
+          <pre id="flowSource" class="code" hidden></pre>
+        </section>
+      </main>
+      <!-- ================================================================= -->
+      <!-- TAB 5: EXPORT                                                     -->
+      <!-- ================================================================= -->
+      <main id="viewCode" class="page" hidden>
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Code <span class="get-tag" title="Made from your equations and values. Change those to change this.">Generated</span></h2>
+              <p>A ready-to-run solver. Pick a language, then copy or download.</p>
+            </div>
+          </div>
+
+          <div class="segmented" role="group" aria-label="Language">
+            <button id="langBtn_python"  class="seg active" onclick="selectExportLang('python')">Python</button>
+            <button id="langBtn_matlab"  class="seg" onclick="selectExportLang('matlab')">MATLAB</button>
+            <button id="langBtn_fortran" class="seg" onclick="selectExportLang('fortran')">Fortran</button>
+          </div>
+
+          <div class="code-bar">
+            <span id="codeFileNameLabel" class="file-name">solvermapp.py</span>
+            <div style="display:flex; gap:6px">
+              <button id="copyBtn" class="btn" onclick="copyGeneratedCode()">Copy</button>
+              <button class="btn btn-primary" onclick="downloadGeneratedCode()">Download</button>
+            </div>
+          </div>
+          <div id="codeNote" class="note" style="margin-bottom:8px" hidden></div>
+
+          <pre id="codeOutputBox" class="code"></pre>
+        </section>
+      </main>
+
+      <!-- ================================================================= -->
+      <!-- TAB 6: REPORT                                                     -->
+      <!-- ================================================================= -->
+      <main id="viewReport" class="page grid-report" hidden>
+        <section class="panel sticky">
+          <div class="panel-head">
+            <div>
+              <h2>Report <span class="get-tag" title="Made from your equations and values. Change those to change this.">Generated</span></h2>
+              <p>A LaTeX write-up of your model. Choose what goes in, then download.</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="reportTitle">Title</label>
+            <input id="reportTitle" class="input" type="text" placeholder="Model description" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="reportAuthor">Author</label>
+            <input id="reportAuthor" class="input" type="text" placeholder="Your name" autocomplete="off">
+          </div>
+
+          <fieldset class="checks">
+            <legend>Sections</legend>
+            <label class="check"><input type="checkbox" data-report="nomenclature"><span>Variables table<small>Symbols, descriptions, units and start values</small></span></label>
+            <label class="check"><input type="checkbox" data-report="equations"><span>Equations<small>Numbered, with sources, assumptions and the meaning of each symbol</small></span></label>
+            <label class="check"><input type="checkbox" data-report="algorithm"><span>Solution algorithm<small>The order of solution with its loops, as pseudocode</small></span></label>
+            <label class="check"><input type="checkbox" data-report="flowchart"><span>Flowchart<small>The solution procedure as a TikZ figure (options in the Flowchart tab)</small></span></label>
+            <label class="check"><input type="checkbox" data-report="references"><span>References<small>A .bib file from the author, year and Reference fields, cited in the equations</small></span></label>
+          </fieldset>
+
+          <fieldset class="checks">
+            <legend>Variables table</legend>
+            <select id="reportGrouping" class="input" aria-label="Grouping">
+              <option value="role">Grouped by role (inputs, state, intermediate, outputs)</option>
+              <option value="alpha">Latin, then Greek symbols, alphabetical</option>
+            </select>
+            <label class="check"><input type="checkbox" data-report="values"><span>Show start values</span></label>
+          </fieldset>
+
+          <fieldset class="checks">
+            <legend>Output</legend>
+            <div class="segmented" role="group" aria-label="Output">
+              <button id="reportMode_standalone" class="seg" onclick="setReportOption('mode', 'standalone')">Standalone document</button>
+              <button id="reportMode_fragment" class="seg" onclick="setReportOption('mode', 'fragment')">Fragment</button>
+            </div>
+            <p id="reportModeHelp" class="help"></p>
+          </fieldset>
+        </section>
+
+        <section class="panel">
+          <div class="code-bar" style="margin-top:0">
+            <div class="segmented" role="group" aria-label="View">
+              <button id="reportView_preview" class="seg active" onclick="setReportView('preview')">Preview</button>
+              <button id="reportView_source" class="seg" onclick="setReportView('source')">LaTeX source</button>
+            </div>
+            <div style="display:flex; gap:6px; flex-wrap:wrap">
+              <button id="reportCopyBtn" class="btn" onclick="copyReport()">Copy LaTeX</button>
+              <button id="reportBibBtn" class="btn" onclick="downloadReportBib()" title="references.bib, for the Fragment output or your own document">Download .bib</button>
+              <button class="btn btn-primary" onclick="downloadReportTex()">Download .tex</button>
+            </div>
+          </div>
+          <ul id="reportNotes" class="warnings" hidden></ul>
+          <article id="reportPreview" class="report-preview"></article>
+          <pre id="reportSource" class="code" hidden></pre>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden>
+    <span id="toastMsg"></span>
+    <button id="toastUndo" class="btn btn-small" onclick="undo()">Undo</button>
+    <button class="btn btn-small" onclick="hideToast()" aria-label="Dismiss">×</button>
+  </div>
+
+  <datalist id="unitSuggestions"></datalist>
+
+  <!-- ================================================================= -->
+  <!-- APPLICATION LOGIC                                                 -->
+  <!-- ================================================================= -->
+
+  <!-- Application logic: classic scripts, in this order (see docs/ARCHITECTURE.md). -->
+  <script src="js/demo.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/plain-math.js"></script>
+  <script src="js/detect.js"></script>
+  <script src="js/registry.js"></script>
+  <script src="js/latex-symbols.js"></script>
+  <script src="js/units.js"></script>
+  <script src="js/unit-check.js"></script>
+  <script src="js/plan.js"></script>
+  <script src="js/latex-to-code.js"></script>
+  <script src="js/codegen.js"></script>
+  <script src="js/evaluate.js"></script>
+  <script src="js/ui-common.js"></script>
+  <script src="js/ui-list.js"></script>
+  <script src="js/ui-card.js"></script>
+  <script src="js/ui-variables.js"></script>
+  <script src="js/ui-plan.js"></script>
+  <script src="js/ui-code.js"></script>
+  <script src="js/ui-report.js"></script>
+  <script src="js/ui-flowchart.js"></script>
+  <script src="js/ui-files.js"></script>
+  <script src="js/ui-tour.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

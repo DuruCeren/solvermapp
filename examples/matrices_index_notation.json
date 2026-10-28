@@ -1,0 +1,196 @@
+{
+  "equations": [
+    {
+      "id": "eq_mvpc8zpif37l",
+      "name": "Hilbert matrix",
+      "author": "",
+      "year": "",
+      "eqNumber": "1",
+      "source": "Index notation test",
+      "archetype": "explicit",
+      "latex": "H_{ij} = \\frac{1}{i + j - 1}",
+      "outputs": [
+        "H"
+      ],
+      "inputs": [],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvpc8zpi9wcr",
+      "name": "Row sums",
+      "author": "",
+      "year": "",
+      "eqNumber": "2",
+      "source": "Index notation test",
+      "archetype": "explicit",
+      "latex": "b_i = \\sum_j H_{ij}",
+      "outputs": [
+        "b"
+      ],
+      "inputs": [
+        "H"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvpc8zpif5e3",
+      "name": "Solve",
+      "author": "",
+      "year": "",
+      "eqNumber": "3",
+      "source": "Index notation test",
+      "archetype": "explicit",
+      "latex": "\\mathbf{x} = H^{-1} b",
+      "outputs": [
+        "\\mathbf{x}"
+      ],
+      "inputs": [
+        "H",
+        "b"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvpc8zpigu9r",
+      "name": "Product",
+      "author": "",
+      "year": "",
+      "eqNumber": "4",
+      "source": "Index notation test",
+      "archetype": "explicit",
+      "latex": "C_{ij} = \\sum_k H_{ik} Q_{kj}",
+      "outputs": [
+        "C"
+      ],
+      "inputs": [
+        "H",
+        "Q"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvpc8zpi4328",
+      "name": "Trace",
+      "author": "",
+      "year": "",
+      "eqNumber": "5",
+      "source": "Index notation test",
+      "archetype": "explicit",
+      "latex": "\\tau = \\sum_i H_{ii}",
+      "outputs": [
+        "\\tau"
+      ],
+      "inputs": [
+        "H"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    },
+    {
+      "id": "eq_mvpc8zpiuufa",
+      "name": "Shifted",
+      "author": "",
+      "year": "",
+      "eqNumber": "6",
+      "source": "Index notation test",
+      "archetype": "explicit",
+      "latex": "d_i = \\sum_{j=1}^{i} H_{j1}",
+      "outputs": [
+        "d"
+      ],
+      "inputs": [
+        "H"
+      ],
+      "loopMeta": "",
+      "assumptions": "",
+      "ioAuto": true,
+      "typeAuto": true,
+      "unitCheck": true,
+      "condition": ""
+    }
+  ],
+  "variableMeta": {
+    "n": {
+      "initVal": "6",
+      "units": "1",
+      "desc": "Size"
+    },
+    "H": {
+      "initVal": "0",
+      "units": "1",
+      "desc": "Hilbert matrix"
+    },
+    "b": {
+      "initVal": "0",
+      "units": "1",
+      "desc": "Row sums"
+    },
+    "\\mathbf{x}": {
+      "initVal": "0",
+      "units": "1",
+      "desc": "Solution (all ones)",
+      "size": "n"
+    },
+    "Q": {
+      "initVal": "I",
+      "units": "1",
+      "desc": "Second matrix (identity)"
+    },
+    "C": {
+      "initVal": "0",
+      "units": "1",
+      "desc": "H B"
+    },
+    "\\tau": {
+      "initVal": "0",
+      "units": "1",
+      "desc": "Trace"
+    },
+    "d": {
+      "initVal": "0",
+      "units": "1",
+      "desc": "Partial column sums"
+    }
+  },
+  "report": {
+    "title": "Matrices in index notation: Hilbert matrix, products, sums",
+    "author": "",
+    "nomenclature": true,
+    "equations": true,
+    "algorithm": true,
+    "flowchart": true,
+    "references": true,
+    "values": true,
+    "grouping": "role",
+    "mode": "standalone"
+  },
+  "flowchart": {
+    "numbers": true,
+    "titles": true
+  },
+  "indices": "i, j, k = 1..n"
+}

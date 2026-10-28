@@ -1,0 +1,20 @@
+flowchart TD
+  n1(["Start"])
+  n2[/"Read inputs<br>Q, n"/]
+  n3["Compute H for every i, j<br>Eq. (1) · Hilbert matrix"]
+  n4["Compute b for every i<br>Eq. (2) · Row sums"]
+  n5["Compute C for every i, j<br>Eq. (3) · Product"]
+  n6["Compute τ<br>Eq. (4) · Trace"]
+  n7["Compute d for every i<br>Eq. (5) · Shifted"]
+  n8["Compute x<br>Eq. (6) · Solve"]
+  n9[/"Write results<br>x, C, τ, d"/]
+  n10(["End"])
+  n1 --> n2
+  n2 --> n3
+  n3 --> n4
+  n4 --> n5
+  n5 --> n6
+  n6 --> n7
+  n7 --> n8
+  n8 --> n9
+  n9 --> n10
